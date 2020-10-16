@@ -1,4 +1,0 @@
-Grading at Fri Oct 16 14:02:19 UTC 2020
-Your file did not match the expected ouput
-
-Overall Grade: FAILED
