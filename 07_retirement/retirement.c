@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct retire_info_t {
+struct _retire_info {
 	int months;
 	double contribution;
 	double rate_of_return;
 };
-typedef	struct retire_info_t retire_info;
+typedef	struct _retire_info retire_info;
 
 void print_line(int age, double balance) {
 	printf("Age %3d month %2d you have $%.2f\n", age/12, age%12, balance);
