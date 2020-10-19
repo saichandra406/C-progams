@@ -39,8 +39,25 @@ rectangle canonicalize(rectangle r) {
 }
 rectangle intersection(rectangle r1, rectangle r2) {
   //WRITE THIS FUNCTION
-  
-  return r1;
+  int left, bottom, right, top;
+  rectangle ans;
+
+  left = r1.x > r2.x ? r1.x : r2.x;
+  bottom = r1.y > r2.y ? r1.y : r2.y;
+  right = r1.x + r1.width < r2.x + r2.width ? r1.x + r1.width : r2.x + r2.width;
+  top = r1.y + r1.height < r2.y + r2.height ? r1.y + r1.height : r2.x + r2.height;
+
+  ans.x = left;
+  ans.y = bottom;
+  if( left > right || bottom > top) {
+	  ans.width = 0;
+	  ans.height = 0;
+  }
+  else {
+	  ans.width = right - left;
+	  ans.height = top - bottom;
+  }
+  return ans;
 }
 
 //You should not need to modify any code below this line
