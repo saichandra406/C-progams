@@ -9,7 +9,7 @@ struct retire_info_t {
 typedef	struct retire_info_t retire_info;
 
 void print_line(int age, double balance) {
-	printf("Age %3d month %2d you have $%.21f\n", age/12, age%12, balance);
+	printf("Age %3d month %2d you have $%.2f\n", age/12, age%12, balance);
 }
 
 double compute_balance(double initial, retire_info status) {
@@ -24,17 +24,16 @@ void retirement (int startAge,   //in months
 {
 	int age = startAge;
 	double balance = initial;
-	for( int i = 1; i <= working.months, i++) {
+	for( int i = 1; i <= working.months; i++) {
 		print_line(age, balance);
 		age++;
 		balance = compute_balance(balance, working);
 	}
-	for( int i = 1; i <= retired.months, i++) {
+	for( int i = 1; i <= retired.months; i++) {
 		print_line(age, balance);
 		age++;
 		balance = compute_balance(balance, retired);
 	}
-	print_line(age, balance); //final balance
 }
 
 int main(void) {
