@@ -30,11 +30,16 @@ rectangle canonicalize(rectangle r) {
     r.x = r.x + r.width;
     r.width = -r.width;
   }
+    if(r.height < 0){
+    r.y = r.y + r.height;
+    r.height = -r.height;
+  }
   
   return r;
 }
 rectangle intersection(rectangle r1, rectangle r2) {
   //WRITE THIS FUNCTION
+  
   return r1;
 }
 
