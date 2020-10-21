@@ -1,7 +1,16 @@
 a
 a a a
 a a
+aaaaaa a
 aaaaa a
+aaaaa aaaaaa
 abcde fghij
+aaaaa aaaaa
+abccd fghij
+abcde fghhi
+abbcd fghhi
+aaabc fghji
+aaaac fghji
+
 
 
