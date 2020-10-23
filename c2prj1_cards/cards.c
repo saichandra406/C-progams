@@ -30,24 +30,26 @@ const char * ranking_to_string(hand_ranking_t r) {
   case NOTHING:
     return "NOTHING";
   }
+  return 0;
 }
 
 char value_letter(card_t c) {
   switch(c.value){
+  case 2:
+  case 3:
+  case 4:
+  case 5:
+  case 6:
+  case 7:
+  case 8:
+  case 9: return '0' + c.value;
   case 10: return '0';
-  case 2: return '0' + 2;
-  case 3: return '0' + 3;
-  case 4: return '0' + 4;
-  case 5: return '0' + 5;
-  case 6: return '0' + 6;
-  case 7: return '0' + 7;
-  case 8: return '0' + 8;
-  case 9: return '0' + 9;
   case VALUE_JACK: return 'J';
   case VALUE_QUEEN: return 'Q';
   case VALUE_KING: return 'K';
   case VALUE_ACE: return 'A';
-}
+  }
+  return 0;
 }
 
 char suit_letter(card_t c){
@@ -143,10 +145,11 @@ card_t card_from_letters(char value_let, char suit_let) {
   case 'c':
     temp.suit = CLUBS;
     break;
+  }
   return temp;
 }
 
-card_t card_from_num(unsigned c) {
+card_t card_from_num(unsigned c){
   card_t temp;
   unsigned rem;
   assert(c >= 0 && c < 52);
