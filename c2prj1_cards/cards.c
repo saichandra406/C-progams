@@ -54,8 +54,7 @@ char value_letter(card_t c) {
 
 char suit_letter(card_t c){
   char temp = 0;
-  suit_t c_suit = c.suit;
-  switch(c_suit){
+  switch(c.suit){
   case SPADES: temp = 's';
     break;
   case HEARTS: temp = 'h';
