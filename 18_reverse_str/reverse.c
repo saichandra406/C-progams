@@ -5,14 +5,16 @@
 void reverse(char * str) {
   char * fp = str, *rp = str;
   char tmp;
-  while(*rp != '\0')
-    rp++;
-  while(fp < rp){
-    rp--;
-    tmp = *fp;
-    *fp = *rp;
-    *rp = tmp;
-    fp++;
+  if(str != NULL){
+    while(*rp != '\0')
+      rp++;
+    while(fp < rp){
+      rp--;
+      tmp = *fp;
+      *fp = *rp;
+      *rp = tmp;
+      fp++;
+    }
   }
 }
 
