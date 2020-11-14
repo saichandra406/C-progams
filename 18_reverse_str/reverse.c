@@ -3,7 +3,17 @@
 #include <string.h>
 
 void reverse(char * str) {
-  //WRITE ME!
+  char * fp = str, *rp = str;
+  char tmp;
+  while(*rp != '\0')
+    rp++;
+  while(fp < rp){
+    rp--;
+    tmp = *fp;
+    *fp = *rp;
+    *rp = tmp;
+    fp++;
+  }
 }
 
 int main(void) {
