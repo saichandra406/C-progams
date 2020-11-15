@@ -11,7 +11,6 @@ int main(void){
   size_t n = *(&x + 1) - x;
   for (size_t i=0; i < n; i++){
     tmp = power(x[i], y[i]);
-    printf("%lu - %u\n", i,tmp);
     if(tmp != ans[i])
       exit(EXIT_FAILURE);
   }
