@@ -14,7 +14,7 @@ void print_hand(deck_t * hand){
 int deck_contains(deck_t * d, card_t c) {
   card_t ** cp = d->cards;
   for(size_t i = 0; i < d->n_cards; i++){
-    if(*(cp)->value == c.value && *(cp)->suit == c.suit)
+    if((*cp)->value == c.value && (*cp)->suit == c.suit)
       return 1;
     cp++; // value also = cp[i]->value
   }
@@ -23,42 +23,18 @@ int deck_contains(deck_t * d, card_t c) {
 }
 
 void shuffle(deck_t * d){
-   This function takes in a deck an shuffles
-   it, randomly permuting the order of the cards.
-   There are MANY valid ways to shuffle a deck
-   of cards---we will leave the specifics
-   of the algorithm design up to you.  However,
-   you will want to use random() to generate
-   pseudo-random numbers.  (Pseudo-random
-   numbers are quite sufficient here,
-   since they are not used for security
-   purposes). Note that you should not need to
-   use the 'srand' function.
-
-      We will note that in trying to devise
-   this algorithm, you should not
-   try to shuffle a deck of cards "normally".
-   Instead, you should take a small number
-   of cards, and think about ways
-   to shuffle them that involve using
-   random numbers to swap their order,
-   or pick positions for them, or
-   similar principles.
+  card_t *temp;
+  int y;
+  for ( int i = 0 ; i < d->n_cards ; i ++ ){
+    y = rand()%d->n_cards;
+    temp = (d->cards)[i] ;
+    (d->cards)[i] = (d->cards)[y];
+    (d->cards)[y] = temp;
+  }
 }
 
 void assert_full_deck(deck_t * d) {
-  This function should check that
-  the passed in deck contains ever
-  valid card exactly once.  If
-  the deck has any problems, this function
-  should fail an assert.  This will
-  be used to help you test your deck
-  shuffling: we will shuffle
-  a full deck, then call assert_full_deck,
-  so that you can identfiy problems with
-  the deck.  You can print
-  any error messages you want
-  if there is a problem.
-  Hint: you already wrote deck_contains.
-
+  for(unsigned i=2; i <= 14; i++)
+    for (suit_t j = SPADES; j <= CLUBS; j++)
+      assert(deck_contains(d, (card_t){i, j}));
 }

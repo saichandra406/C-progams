@@ -154,24 +154,9 @@ card_t card_from_num(unsigned c){
   assert(c >= 0 && c < 52);
   temp.suit = c / 13;
   rem = c % 13;
-  switch(rem){
-  case 0: temp.value = VALUE_ACE;
-    break;
-  case 1:
-  case 2:
-  case 3:
-  case 4:
-  case 5:
-  case 6:
-  case 7:
-  case 8: temp.value = rem + 1;
-    break;
-  case 9: temp.value = 0;
-  break;
-  case 10:
-  case 11:
-  case 12: temp.value = rem + 1;
-  break;
-  }
+  if(rem == 0)
+    temp.value = 14;
+  else
+    temp.value = rem + 1;
   return temp;
 }
