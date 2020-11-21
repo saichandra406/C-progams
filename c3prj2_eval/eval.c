@@ -4,29 +4,112 @@
 #include <assert.h>
 
 int card_ptr_comp(const void * vp1, const void * vp2) {
-  return 0;
+	const card_t * const * cp1 = vp1;
+	const card_t * const * cp2 = vp2;
+	//values as well as suits in descending order
+	int comp = cp2->value - cp1->value;
+	if(comp != 0){
+		return comp;
+	}
+	else{
+		//same values different suit
+		return cp2->suit - cp1->suit;
+	}
 }
 
 suit_t flush_suit(deck_t * hand) {
+	char suit_count[4] = {0};
+	for(size_t i = 0; i < hand->n_cards; i++) {
+		//increment suit
+		//hand select cards field
+		//get the ith card pointer
+		//select field suit
+		suit_count[((hand->cards)[i])->suit]++;
+	}
+	for(int i=0; i < 4; i++){
+		if(suit_count[i] >= 5)
+			return (suit_t)i;
+	}
   return NUM_SUITS;
 }
 
 unsigned get_largest_element(unsigned * arr, size_t n) {
-  return 0;
+  unsigned tmp;
+  if(arr == NULL || n == 0)
+	return 0;
+	tmp = arr[0];
+	for(size_t i=1; i < n; i++){
+		if(arr[i] > tmp)
+			tmp = arr[i];
+	}
+	return tmp;
 }
 
 size_t get_match_index(unsigned * match_counts, size_t n,unsigned n_of_akind){
-
-  return 0;
+	size_t index = -1;
+	for(size_t i = 0; i < n; i++){
+		if(match_counts[i] == n_of_akind){
+			index = i;
+			break;
+		}
+	}
+	assert(index >=0);
+  return index;
 }
-ssize_t  find_secondary_pair(deck_t * hand,
+
+size_t  find_secondary_pair(deck_t * hand,
 			     unsigned * match_counts,
 			     size_t match_idx) {
-  return -1;
+		//match_counts : if its pair/2 or 3 highest same valued cards(matched cards)
+		//objective: find if another pair exists other than above matched cards
+		//hand is sorted. If not, passing/use of match_idx is retarded/ illogical
+	size_t tail_idx = match_idx + (size_t)match_counts;
+		//index after the last card of the matched cards.
+	if(tail_idx >= hand->n_cards - 1){
+		//index are 0,1,.. , n_cards - 2, n_cards - 1
+		// tail index is the end or one before end of the hand,
+		// cannot find secondary pair
+		return -1;
+	}		
+	else {
+		while(tail_idx < n_cards - 1){
+			if((hand->cards[tail_idx])-> value == (hand->cards[tail_idx + 1])-> value)
+				return tail_idx;
+			tail_idx++;
+		}
+	}
+	return -1; //if the else-block fails to find
 }
 
 int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
-  return 0;
+	unsigned nextv, count=0; //next card value, no of success comparisions
+	size_t cur_idx = index;
+	if(cur_idx <= hand->n_cards - 4 &&
+		(fs == NUM_SUITS || fs == hand->cards[cur_idx]->suit)){
+		nextv = hand->cards[cur_idx] - 1;
+		while(cur_idx < hand->n_cards - 1){
+			//as we are incrementing after check so condition is < n - 1
+			cur_idx++;
+			if(hand->cards[cur_idx]->value == nextv &&
+				(fs == NUM_SUITS || fs == hand->cards[cur_idx]->suit)){
+					count++;
+					nextv--;
+					if(count == 4)
+						break;
+				}
+		}
+		if(count == 4) return 1;
+		else if(count == 3 && hand->cards[index]->value == 5){
+			cur_idx = 0;
+			while(hand->cards[cur_idx]->value == VALUE_ACE){
+				if(fs == NUM_SUITS || fs == hand->cards[cur_idx]->suit)
+					return -1;
+				cur_idx++;
+			}
+		}
+	}
+	//default else
+	return 0;
 }
 
 hand_eval_t build_hand_from_match(deck_t * hand,
@@ -35,13 +118,42 @@ hand_eval_t build_hand_from_match(deck_t * hand,
 				  size_t idx) {
 
   hand_eval_t ans;
+  unsigned i = 0, j;
+  ans.ranking = what;
+  while(i < n){
+		ans.cards[i] = hand->cards[idx+i];
+		i++;
+  }
+  j = 0;
+  while(i < 5){
+	  if(j < idx || j >= idx + n){
+		  ans.cards[i] == hand->cards[j];
+		  i++;
+	  }
+	  j++;
+  } 
+  
   return ans;
 }
 
 
 int compare_hands(deck_t * hand1, deck_t * hand2) {
-
-  return 0;
+	hand_eval_t h1, h2;
+	qsort(hand1->cards, hand1->n_cards, sizeof(* card_t), card_ptr_comp);
+	qsort(hand2->cards, hand2->n_cards, sizeof(* card_t), card_ptr_comp);
+	h1 = evaluate_hand(hand1);
+	h2 = evaluate_hand(hand2);
+	if(h1.ranking == h2.ranking){
+		for(size_t i = 0; i < 5; i++){
+			if(h1.cards[i]->value > h2.cards[i]->value)
+				return 1;
+			else if(h1.cards[i]->value < h2.cards[i]->value)
+				return -1;
+		}
+		// all card values are same
+		return 0;		
+	}
+	return h1.ranking - h2.ranking; // +ve if 1 wins,-ve if 2 wins
 }
 
 
