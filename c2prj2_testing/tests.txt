@@ -13,4 +13,6 @@ Ac Ad As Kc Qc Jc 0c; Ad Kc Qc Jc 0c 8h 6d
 As Qs 0h 8d 6s 4s 2s; Kc Qs 0h 8d 6s 4s 3c
 Ac Ad As Kc Qc Jc 0c; Ad Kc Qc Jc 0c 0h 0s
 Kc Jd 9s 7h 6h 6d 6s; Kc Jd 9s 8s 8d 7h 6h
+Kc Kd Ks 0h 8d 7c 7s; Kc Kd Ks 0h 8d 6c 6s
+Kc Kd Ks 0h 8d 7c 7s; Kc Kd Ks 0h 8d 7d 7h
 

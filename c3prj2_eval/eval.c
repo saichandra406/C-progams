@@ -7,13 +7,13 @@ int card_ptr_comp(const void * vp1, const void * vp2) {
 	const card_t * const * cp1 = vp1;
 	const card_t * const * cp2 = vp2;
 	//values as well as suits in descending order
-	int comp = cp2->value - cp1->value;
+	int comp = (*cp2)->value - (*cp1)->value;
 	if(comp != 0){
 		return comp;
 	}
 	else{
 		//same values different suit
-		return cp2->suit - cp1->suit;
+	  return (*cp2)->suit - (*cp1)->suit;
 	}
 }
 
@@ -57,13 +57,13 @@ size_t get_match_index(unsigned * match_counts, size_t n,unsigned n_of_akind){
   return index;
 }
 
-size_t  find_secondary_pair(deck_t * hand,
+ssize_t  find_secondary_pair(deck_t * hand,
 			     unsigned * match_counts,
 			     size_t match_idx) {
 		//match_counts : if its pair/2 or 3 highest same valued cards(matched cards)
 		//objective: find if another pair exists other than above matched cards
 		//hand is sorted. If not, passing/use of match_idx is retarded/ illogical
-	size_t tail_idx = match_idx + (size_t)match_counts;
+  size_t tail_idx = match_idx + (size_t)get_largest_element(match_counts, hand->n_cards);
 		//index after the last card of the matched cards.
 	if(tail_idx >= hand->n_cards - 1){
 		//index are 0,1,.. , n_cards - 2, n_cards - 1
@@ -72,7 +72,7 @@ size_t  find_secondary_pair(deck_t * hand,
 		return -1;
 	}		
 	else {
-		while(tail_idx < n_cards - 1){
+	  while(tail_idx < hand->n_cards - 1){
 			if((hand->cards[tail_idx])-> value == (hand->cards[tail_idx + 1])-> value)
 				return tail_idx;
 			tail_idx++;
@@ -81,12 +81,12 @@ size_t  find_secondary_pair(deck_t * hand,
 	return -1; //if the else-block fails to find
 }
 
-int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
+int is_straight_helper(deck_t * hand, size_t index, suit_t fs, unsigned straight_count){
 	unsigned nextv, count=0; //next card value, no of success comparisions
 	size_t cur_idx = index;
 	if(cur_idx <= hand->n_cards - 4 &&
 		(fs == NUM_SUITS || fs == hand->cards[cur_idx]->suit)){
-		nextv = hand->cards[cur_idx] - 1;
+		nextv = hand->cards[cur_idx]->value - 1;
 		while(cur_idx < hand->n_cards - 1){
 			//as we are incrementing after check so condition is < n - 1
 			cur_idx++;
@@ -94,22 +94,36 @@ int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
 				(fs == NUM_SUITS || fs == hand->cards[cur_idx]->suit)){
 					count++;
 					nextv--;
-					if(count == 4)
+					if(count == straight_count - 1)
 						break;
 				}
 		}
-		if(count == 4) return 1;
-		else if(count == 3 && hand->cards[index]->value == 5){
-			cur_idx = 0;
-			while(hand->cards[cur_idx]->value == VALUE_ACE){
-				if(fs == NUM_SUITS || fs == hand->cards[cur_idx]->suit)
-					return -1;
-				cur_idx++;
-			}
-		}
+		if(count == straight_count - 1) return 1;
 	}
 	//default else
 	return 0;
+  
+}
+
+int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
+  int ret_val; //return value
+  ret_val = is_straight_helper(hand, index,fs, 5);
+  
+  if(ret_val == 0 && hand->cards[index]->value == VALUE_ACE
+        && (fs == NUM_SUITS || fs == hand->cards[index]->suit)){
+    while(index < hand->n_cards - 3){
+      index++;
+      if(hand->cards[index]->value == 5
+	 &&(fs == NUM_SUITS || fs == hand->cards[index]->suit)){
+	 ret_val = is_straight_helper(hand, index, fs, 4);
+	 break;
+      }
+    }
+    if(ret_val == 1)
+      return -1;
+  }
+  //default else
+	return ret_val;
 }
 
 hand_eval_t build_hand_from_match(deck_t * hand,
@@ -127,7 +141,7 @@ hand_eval_t build_hand_from_match(deck_t * hand,
   j = 0;
   while(i < 5){
 	  if(j < idx || j >= idx + n){
-		  ans.cards[i] == hand->cards[j];
+		  ans.cards[i] = hand->cards[j];
 		  i++;
 	  }
 	  j++;
@@ -136,13 +150,13 @@ hand_eval_t build_hand_from_match(deck_t * hand,
   return ans;
 }
 
-
 int compare_hands(deck_t * hand1, deck_t * hand2) {
 	hand_eval_t h1, h2;
-	qsort(hand1->cards, hand1->n_cards, sizeof(* card_t), card_ptr_comp);
-	qsort(hand2->cards, hand2->n_cards, sizeof(* card_t), card_ptr_comp);
+	qsort(hand1->cards, hand1->n_cards, sizeof(card_t *), card_ptr_comp);
+	qsort(hand2->cards, hand2->n_cards, sizeof(card_t *), card_ptr_comp);
 	h1 = evaluate_hand(hand1);
 	h2 = evaluate_hand(hand2);
+
 	if(h1.ranking == h2.ranking){
 		for(size_t i = 0; i < 5; i++){
 			if(h1.cards[i]->value > h2.cards[i]->value)
@@ -153,7 +167,8 @@ int compare_hands(deck_t * hand1, deck_t * hand2) {
 		// all card values are same
 		return 0;		
 	}
-	return h1.ranking - h2.ranking; // +ve if 1 wins,-ve if 2 wins
+	//highest ranking 0, lowest 8
+	return h2.ranking - h1.ranking; // +ve if 1 wins,-ve if 2 wins
 }
 
 
