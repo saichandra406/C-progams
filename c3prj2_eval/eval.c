@@ -63,22 +63,17 @@ ssize_t  find_secondary_pair(deck_t * hand,
 		//match_counts : if its pair/2 or 3 highest same valued cards(matched cards)
 		//objective: find if another pair exists other than above matched cards
 		//hand is sorted. If not, passing/use of match_idx is retarded/ illogical
-  size_t tail_idx = match_idx + (size_t)get_largest_element(match_counts, hand->n_cards);
+  size_t tail_idx = match_idx + (size_t)get_largest_element(match_counts, hand->n_cards) - 1;
 		//index after the last card of the matched cards.
-	if(tail_idx >= hand->n_cards - 1){
-		//index are 0,1,.. , n_cards - 2, n_cards - 1
-		// tail index is the end or one before end of the hand,
-		// cannot find secondary pair
-		return -1;
-	}		
-	else {
-	  while(tail_idx < hand->n_cards - 1){
-			if((hand->cards[tail_idx])-> value == (hand->cards[tail_idx + 1])-> value)
-				return tail_idx;
-			tail_idx++;
-		}
-	}
-	return -1; //if the else-block fails to find
+  size_t cur_idx = 1;
+  while(cur_idx < hand->n_cards){
+    if(cur_idx < match_idx || cur_idx > tail_idx){
+      if(hand->cards[cur_idx - 1]->value == hand->cards[cur_idx]->value)
+	return cur_idx - 1;
+    }
+    cur_idx++;
+  }
+  return -1; //if the else-block fails to find
 }
 
 int is_straight_helper(deck_t * hand, size_t index, suit_t fs, unsigned straight_count){
