@@ -16,7 +16,7 @@ int find_greatest(size_t* array){
 int main(int argc, char ** argv)
 {
   size_t freq[26] = {0};
-  int c;
+  int c, n=0;
   if(argc != 2){
     fprintf(stderr, "No of arguments: %d. Required: 2\n", argc);
     return EXIT_FAILURE;
@@ -29,8 +29,10 @@ int main(int argc, char ** argv)
   while((c = fgetc(f)) != EOF){
     if(isalpha(c)){
       freq[c/32 - 1]++; //A = 65 / 32 = 1, a = 97/32 = 1
+      n++;
     }
   }
+  printf("%d\n", n);
   fprintf(stdout, "%d\n", (find_greatest(freq) + 26 - 4) / 26);
 
   return 0;
