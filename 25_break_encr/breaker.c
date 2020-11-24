@@ -28,7 +28,7 @@ int main(int argc, char ** argv)
   }
   while((c = fgetc(f)) != EOF){
     if(isalpha(c)){
-      freq[c/32 - 1]++; //A = 65 / 32 = 1, a = 97/32 = 1
+      freq[c%32 - 1]++; //A = 65 / 32 = 1, a = 97/32 = 1
     }
   }
 
