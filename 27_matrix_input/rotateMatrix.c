@@ -33,15 +33,25 @@ int main(int argc, char ** argv)
       if((c = fgetc(f)) != EOF){
 	if(isprint(c))
 	  matrix[i][j] = (char) c;
-	else
+	else{
+	  fprintf(stderr, "Non printable character\n");
 	  return EXIT_FAILURE;
+	}
+      }
+      else{
+	fprintf(stderr, "Reached EOF failure\n");
+	return EXIT_FAILURE;
       }
     }
-    if(fgetc(f) != '\n')
+    if(fgetc(f) != '\n'){
+      fprintf(stderr, "Line too more\n");
       return EXIT_FAILURE;
+    }
   }
-  if(fgetc(f) != EOF)
+  if(fgetc(f) != EOF){
+    fprintf(stderr, "Non printable character\n");
     return EXIT_FAILURE;
+  }
 
   rotate(matrix);
 
