@@ -31,7 +31,7 @@ int main(int argc, char ** argv)
   for(int i = 0; i < 10; i++){
     for(int j = 0; j < 10; j++){
       if((c = fgetc(f)) != EOF){
-	if(isprint(c))
+	if(isprint(c) || c > 127)
 	  matrix[i][j] = (char) c;
 	else{
 	  fprintf(stderr, "Non printable character\n");
