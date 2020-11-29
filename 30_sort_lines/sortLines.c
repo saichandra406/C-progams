@@ -73,6 +73,5 @@ int main(int argc, char ** argv) {
      printArray(array, n_lines);
     }
   }
-  printf("SUCCESS\n");
   return EXIT_SUCCESS;
 }
