@@ -24,21 +24,23 @@ void sortData(char ** data, size_t count) {
  */
 char** readFile(FILE * f, size_t* n_lines){
   char * line = NULL;//initialize to NULL to avoid garbage value
-  size_t sz;
-  int c_read;
+  size_t sz = 0;
+  int c_read = 0;
   size_t n = 0;
   char **array = NULL;
-  int check;
-  if(f == stdin)
+  int check = 0;
+  if(f == stdin){
     check = 1;
-  else
-    check = 0;//to include newline
+  }
+  //to include newline check = 0
   //newline gets stdin terminated
   while ((c_read = getline(&line,&sz, f)) > check) {
     n++;
     array = realloc(array, n * sizeof(*array));
     array[n-1] = malloc((c_read + 1) * sizeof(**array));
-    strncpy(array[n-1],line, c_read);//line size larger tnan array[n-1]
+    strncpy(array[n-1],line, c_read + 1);//line size larger tnan array[n-1]
+    //also to copy null terminator from line have c_read + 1
+    //otherwise it will not be null terminated; cause overflow
   }
   free(line);
   *n_lines = n;
@@ -52,6 +54,11 @@ char** readFile(FILE * f, size_t* n_lines){
 void printArray(char **array, size_t n_lines){
   for(size_t i=0; i < n_lines; i++){
     printf("%s", array[i]);
+  }
+}
+
+void freeArray(char **array, size_t n_lines){
+  for(size_t i=0; i < n_lines; i++){
     free(array[i]);
   }
   free(array);
@@ -66,10 +73,9 @@ int main(int argc, char ** argv) {
     array = readFile(f, &n_lines);
     sortData(array, n_lines);
     printArray(array, n_lines);
-    
+    freeArray(array, n_lines);
   }
   else{
-    //read arguments, sort their names then open them
     for(int i=1; i < argc; i++){
       f = fopen(argv[i], "r");
       if(f == NULL){
@@ -80,6 +86,7 @@ int main(int argc, char ** argv) {
      fclose(f);
      sortData(array, n_lines);
      printArray(array, n_lines);
+     freeArray(array, n_lines);
     }
   }
   return EXIT_SUCCESS;
