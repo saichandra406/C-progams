@@ -21,15 +21,16 @@ void sortData(char ** data, size_t count) {
  */
 char** readFile(FILE * f, size_t* n_lines){
   char * line = NULL;//initialize to NULL to avoid garbage value
-  size_t sz, c_read;
+  size_t sz;
+  int c_read;
   size_t n = 0;
   char **array = NULL;
   //newline gets stdin terminated
   while ((c_read = getline(&line,&sz, f)) > 1) {
     n++;
     array = realloc(array, n * sizeof(*array));
-    array[n-1] = malloc(c_read * sizeof(**array));
-    strcpy(array[n-1],line);
+    array[n-1] = malloc((c_read + 1) * sizeof(**array));
+    strncpy(array[n-1],line, c_read);//line size larger tnan array[n-1]
   }
   free(line);
   *n_lines = n;
