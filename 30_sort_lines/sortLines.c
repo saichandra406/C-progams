@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+//Testcase1 ?
+//Testcase2 normal input
+//Testcase3 ?
+//Testcase4 ?
 
 //This function is used to figure out the ordering
 //of the strings in qsort.  You do not need
@@ -25,8 +28,13 @@ char** readFile(FILE * f, size_t* n_lines){
   int c_read;
   size_t n = 0;
   char **array = NULL;
+  int check;
+  if(f == stdin)
+    check = 1;
+  else
+    check = 0;//to include newline
   //newline gets stdin terminated
-  while ((c_read = getline(&line,&sz, f)) > 1) {
+  while ((c_read = getline(&line,&sz, f)) > check) {
     n++;
     array = realloc(array, n * sizeof(*array));
     array[n-1] = malloc((c_read + 1) * sizeof(**array));
@@ -61,6 +69,7 @@ int main(int argc, char ** argv) {
     
   }
   else{
+    //read arguments, sort their names then open them
     for(int i=1; i < argc; i++){
       f = fopen(argv[i], "r");
       if(f == NULL){
