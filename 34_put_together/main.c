@@ -36,6 +36,10 @@ int main(int argc, char ** argv) {
   //WRITE ME (plus add appropriate error checking!)
   //read the key/value pairs from the file named by argv[1] (call the result kv)
   kvarray_t * kv = readKVs(argv[1]);
+  if(kv == NULL){
+    fprintf(stderr, "Invalid kv file: %s\n", argv[1]);
+    return EXIT_FAILURE;
+  }
   counts_t * c = NULL;
   char * outName = NULL;
   FILE * f = NULL;
@@ -44,6 +48,10 @@ int main(int argc, char ** argv) {
     //count the values that appear in the file named by argv[i], using kv as the key/value pair
     //   (call this result c)
     c = countFile(argv[i], kv);
+    if(c == NULL){
+      fprintf(stderr, "Invalid file: %s\n", argv[1]);
+      return EXIT_FAILURE;
+    }
     //compute the output file name from argv[i] (call this outName)
     outName = computeOutputFileName(argv[i]);
     //open the file named by outName (call that f)
