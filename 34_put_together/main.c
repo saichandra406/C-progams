@@ -23,11 +23,11 @@ counts_t * countFile(const char * filename, kvarray_t * kvPairs) {
     key = realloc(key, n_char * sizeof(*key));
     strncpy(key, line, n_char); // 1 '\0' included
     value = lookupValue(kvPairs, key);
+    //no need to free value as return is shallow copy
     addCount(ans, value);
   }
   free(line);
   free(key);
-  free(value);
   fclose(f);
   return ans;
 }

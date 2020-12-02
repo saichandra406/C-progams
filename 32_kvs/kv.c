@@ -76,6 +76,7 @@ char * lookupValue(kvarray_t * pairs, const char * key) {
   for(size_t i = 0; i < pairs->num; i++){
     if(strcmp(pairs->array[i]->key, key) == 0)
       return pairs->array[i]->value;
+    //returns shallow copy to avoid freeing returned string
   }
   return NULL;
 }
