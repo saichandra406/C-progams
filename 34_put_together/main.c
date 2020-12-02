@@ -5,14 +5,6 @@
 #include "counts.h"
 #include "outname.h"
 
-void stripNewLine(char * line){
-  char *ptr = line;
-  while(*ptr != '\n'){
-    ptr++;
-  }
-  *ptr = '\0';
-}
-
 counts_t * countFile(const char * filename, kvarray_t * kvPairs) {
   //WRITE ME
   FILE *f = fopen(filename, "r");

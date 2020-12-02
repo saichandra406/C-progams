@@ -3,6 +3,14 @@
 #include <string.h>
 #include "kv.h"
 
+void stripNewLine(char * line){
+  char *ptr = line;
+  while(*ptr != '\n'){
+    ptr++;
+  }
+  *ptr = '\0';
+}
+
 kvpair_t * splitLine(char * line){
   size_t ptr_idx = strchr(line, '=') - line;
   size_t diff_len; // difference in length of line and key
