@@ -38,3 +38,22 @@ void assert_full_deck(deck_t * d) {
     for (suit_t j = SPADES; j <= CLUBS; j++)
       assert(deck_contains(d, (card_t){i, j}));
 }
+
+deck_t * make_deck_exclude(deck_t * excluded_cards) {
+
+}
+
+void add_card_to(deck_t * deck, card_t c) {
+
+}
+
+card_t * add_empty_card(deck_t * deck){
+
+}
+void free_deck(deck_t * deck) {
+
+}
+
+deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
+
+}
