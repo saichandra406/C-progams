@@ -1,0 +1,19 @@
+Grading at Sat Dec  5 15:45:52 UTC 2020
+Compiling cards.c -> cards.o
+Compiling deck.c -> deck.o
+Compiling input.c -> input.o
+input.c: In function ‘read_input’:
+input.c:52:17: error: passing argument 1 of ‘getline’ from incompatible pointer type [-Werror=incompatible-pointer-types]
+   while(getline(line, &sz, f) > 0){
+                 ^
+In file included from input.c:1:0:
+/usr/include/stdio.h:678:20: note: expected ‘char ** restrict’ but argument is of type ‘char *’
+ extern _IO_ssize_t getline (char **__restrict __lineptr,
+                    ^
+input.c:55:5: error: value computed is not used [-Werror=unused-value]
+     *n_hands++;
+     ^
+cc1: all warnings being treated as errors
+Compilation of input.c failed
+
+Overall Grade: F
