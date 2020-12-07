@@ -9,10 +9,18 @@
 #include "future.h"
 #include "input.h"
 
+void stripNewLine(char * line){
+  char *ptr = line;
+  while(*ptr != '\n'){
+    ptr++;
+  }
+  *ptr = '\0';
+}
+
 deck_t * hand_from_string(const char * str, future_cards_t * fc){
   size_t idx = 0;
   int count = 0, tmp;
-  deck * ans = NULL;
+  deck_t * ans = NULL;
   card_t *p;
   char * sub;
 
@@ -20,7 +28,7 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc){
   ans->cards = NULL;
   ans->n_cards = 0;
   stripNewLine(str);
-  while((sub = strtok(str + idx, " ")) != NULL){
+  while((sub = strtok((const)(str + idx), " ")) != NULL){
     count++;
     tmp = strlen(sub);
     idx = tmp + 1;
