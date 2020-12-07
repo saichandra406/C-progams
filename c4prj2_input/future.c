@@ -27,9 +27,8 @@ void add_future_card(future_cards_t * fc, size_t index, card_t * ptr){
   if(fc->n_decks <= index){
     fc->decks = realloc(fc->decks, (index + 1) * sizeof(*fc->decks));
     fc->n_decks = index + 1;
-    fc->decks[index] = malloc(sizeof(fc->decks[index]));
     fc->decks[index].n_cards = 0;
-    fc->decks[index].cards = NULL:
+    fc->decks[index].cards = NULL;
   }
   cur_deck = fc->decks[index];
   cur_deck.n_cards++;
