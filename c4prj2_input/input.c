@@ -10,36 +10,28 @@
 #include "input.h"
 
 deck_t * hand_from_string(const char * str, future_cards_t * fc){
-  int len=strlen(str);
-  deck_t *ans=malloc(sizeof(*ans));
-  ans->cards=NULL;
-  ans->n_cards=0;
-  for(int i=0;i<len-1;i++){
-    if ((str[i] == '\n') || (str[i] == ' ')){
-      continue;
+  size_t idx = 0;
+  int count = 0, tmp;
+  deck * ans = NULL;
+  card_t *p;
+  char * sub;
+
+  ans = malloc(sizeof(*ans));
+  ans->cards = NULL;
+  ans->n_cards = 0;
+  stripNewLine(str);
+  while((sub = strtok(str + idx, " ")) != NULL){
+    count++;
+    tmp = strlen(sub);
+    idx = tmp + 1;
+    if(sub[0] == '?'){
+      tmp = atoi(sub+1);//index in fc
+      p = add_empty_card(ans);
+      add_future_card(fc, idx, p);
     }
     else{
-      if(str[i]=='?'){
-	i++;
-	char num[strlen(str)];
-	int n = 0;
-	while (!((str[i] == '\n') || (str[i] == ' '))){
-	  num[n] = str[i];
-	  i++;
-	  n++;
-	}
-	num[n] = '\0';
-	add_future_card(fc, atoi(num), add_empty_card(ans));
-      }
-      else{
-	card_t card=card_from_letters(str[i],str[i+1]);
-	add_card_to(ans,card);
-	i++;
-      }
-    }}
-  if(ans->n_cards<5){
-    fprintf(stderr,"Less than 5 cards\n");
-    return NULL;
+      add_card_to(ans, card_from_letters(sub[0], sub[1]));
+    }
   }
   return ans;
 }
