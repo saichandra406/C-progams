@@ -1,23 +1,13 @@
-Grading at Mon Dec  7 10:47:29 UTC 2020
+Grading at Mon Dec  7 10:56:00 UTC 2020
 Compiling cards.c -> cards.o
 Compiling deck.c -> deck.o
 Compiling input.c -> input.o
 input.c: In function ‘hand_from_string’:
-input.c:30:16: error: passing argument 1 of ‘stripNewLine’ discards ‘const’ qualifier from pointer target type [-Werror=discarded-qualifiers]
-   stripNewLine(str);
-                ^
-input.c:12:6: note: expected ‘char *’ but argument is of type ‘const char *’
- void stripNewLine(char * line){
-      ^
-input.c:31:3: error: type defaults to ‘int’ in type name [-Werror=implicit-int]
-   while((sub = strtok((const)(str + idx), " ")) != NULL){
-   ^
-input.c:31:23: error: cast from pointer to integer of different size [-Werror=pointer-to-int-cast]
-   while((sub = strtok((const)(str + idx), " ")) != NULL){
+input.c:31:23: error: passing argument 1 of ‘strtok’ discards ‘const’ qualifier from pointer target type [-Werror=discarded-qualifiers]
+   while((sub = strtok((str + idx), " ")) != NULL){
                        ^
-input.c:31:23: error: passing argument 1 of ‘strtok’ makes pointer from integer without a cast [-Werror=int-conversion]
 In file included from input.c:4:0:
-/usr/include/string.h:343:14: note: expected ‘char * restrict’ but argument is of type ‘int’
+/usr/include/string.h:343:14: note: expected ‘char * restrict’ but argument is of type ‘const char *’
  extern char *strtok (char *__restrict __s, const char *__restrict __delim)
               ^
 cc1: all warnings being treated as errors
