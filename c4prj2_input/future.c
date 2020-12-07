@@ -27,23 +27,23 @@ void add_future_card(future_cards_t * fc, size_t index, card_t * ptr){
   if(fc->n_decks <= index){
     fc->decks = realloc(fc->decks, (index + 1) * sizeof(*fc->decks));
     fc->n_decks = index + 1;
-    fc->decks[index] = malloc(sizeof(*fc->decks[index]));
-    fc->decks[index]->n_cards = 0;
-    fc->decks[index]->cards = NULL:
+    fc->decks[index] = malloc(sizeof(fc->decks[index]));
+    fc->decks[index].n_cards = 0;
+    fc->decks[index].cards = NULL:
   }
   cur_deck = fc->decks[index];
-  cur_deck->n_cards++;
-  cur_deck->cards = realloc(cur_deck->cards, \
-			    cur_deck->n_cards * sizeof(*cur_deck->cards));
-  cur_deck->cards[cur_deck->n_cards - 1] = ptr;
+  cur_deck.n_cards++;
+  cur_deck.cards = realloc(cur_deck.cards, \
+			   cur_deck.n_cards * sizeof(*cur_deck.cards));
+  cur_deck.cards[cur_deck.n_cards - 1] = ptr;
 }
 
 void replace_future_card(future_cards_t * fc, size_t index, card_t * ptr) {
-  deck_t * cur_deck = fc->decks[index];
-  if(cur_deck->n_cards > 0 && isEmptyCard(cur_deck->cards[0])){
+  deck_t cur_deck = fc->decks[index];
+  if(cur_deck.n_cards > 0 && isEmptyCard(cur_deck.cards[0])){
     //current cards are not replaced.
-    for(size_t j = 0; j < cur_deck->n_cards; j++){
-      copyCard(cur_deck->cards[j], ptr);
+    for(size_t j = 0; j < cur_deck.n_cards; j++){
+      copyCard(cur_deck.cards[j], ptr);
     }
   }
   //if its not empy card do nothing
