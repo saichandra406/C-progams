@@ -1,16 +1,11 @@
-Grading at Mon Dec  7 10:56:00 UTC 2020
+Grading at Mon Dec  7 11:08:31 UTC 2020
 Compiling cards.c -> cards.o
 Compiling deck.c -> deck.o
 Compiling input.c -> input.o
-input.c: In function ‘hand_from_string’:
-input.c:31:23: error: passing argument 1 of ‘strtok’ discards ‘const’ qualifier from pointer target type [-Werror=discarded-qualifiers]
-   while((sub = strtok((str + idx), " ")) != NULL){
-                       ^
-In file included from input.c:4:0:
-/usr/include/string.h:343:14: note: expected ‘char * restrict’ but argument is of type ‘const char *’
- extern char *strtok (char *__restrict __s, const char *__restrict __delim)
-              ^
-cc1: all warnings being treated as errors
+input.c: In function ‘getsub’:
+input.c:28:5: error: too many arguments to function ‘strcpy’
+     strcpy(ans, str+idx, n);
+     ^
 Compilation of input.c failed
 
 Overall Grade: F
