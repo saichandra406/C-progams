@@ -25,7 +25,7 @@ char * getsub(const char * str, size_t idx){
   }
   if(n){
     ans = malloc((n+1) * sizeof(char));
-    strcpy(ans, str+idx, n);
+    strncpy(ans, str+idx, n);
     ans[n] = '\0';
   }
   return ans;
