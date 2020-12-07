@@ -1,46 +1,15 @@
-Grading at Mon Dec  7 06:38:08 UTC 2020
+Grading at Mon Dec  7 07:03:47 UTC 2020
 Compiling cards.c -> cards.o
 Compiling deck.c -> deck.o
 Compiling input.c -> input.o
 Compiling future.c -> future.o
 future.c: In function ‘add_future_card’:
-future.c:30:38: error: invalid type argument of unary ‘*’ (have ‘deck_t {aka struct deck_tag}’)
-     fc->decks[index] = malloc(sizeof(*fc->decks[index]));
-                                      ^
-future.c:31:21: error: invalid type argument of ‘->’ (have ‘deck_t {aka struct deck_tag}’)
-     fc->decks[index]->n_cards = 0;
-                     ^
-future.c:32:21: error: invalid type argument of ‘->’ (have ‘deck_t {aka struct deck_tag}’)
-     fc->decks[index]->cards = NULL:
-                     ^
-future.c:32:35: error: expected ‘;’ before ‘:’ token
-     fc->decks[index]->cards = NULL:
-                                   ^
-future.c:35:11: error: invalid type argument of ‘->’ (have ‘deck_t {aka struct deck_tag}’)
-   cur_deck->n_cards++;
-           ^
-future.c:36:11: error: invalid type argument of ‘->’ (have ‘deck_t {aka struct deck_tag}’)
-   cur_deck->cards = realloc(cur_deck->cards, \
-           ^
-future.c:36:37: error: invalid type argument of ‘->’ (have ‘deck_t {aka struct deck_tag}’)
-   cur_deck->cards = realloc(cur_deck->cards, \
-                                     ^
-future.c:37:16: error: invalid type argument of ‘->’ (have ‘deck_t {aka struct deck_tag}’)
-        cur_deck->n_cards * sizeof(*cur_deck->cards));
-                ^
-future.c:37:44: error: invalid type argument of ‘->’ (have ‘deck_t {aka struct deck_tag}’)
-        cur_deck->n_cards * sizeof(*cur_deck->cards));
-                                            ^
-future.c:38:11: error: invalid type argument of ‘->’ (have ‘deck_t {aka struct deck_tag}’)
-   cur_deck->cards[cur_deck->n_cards - 1] = ptr;
-           ^
-future.c:38:27: error: invalid type argument of ‘->’ (have ‘deck_t {aka struct deck_tag}’)
-   cur_deck->cards[cur_deck->n_cards - 1] = ptr;
-                           ^
-future.c: In function ‘replace_future_card’:
-future.c:42:23: error: incompatible types when initializing type ‘deck_t * {aka struct deck_tag *}’ using type ‘deck_t {aka struct deck_tag}’
-   deck_t * cur_deck = fc->decks[index];
-                       ^
+future.c:30:22: error: incompatible types when assigning to type ‘deck_t {aka struct deck_tag}’ from type ‘void *’
+     fc->decks[index] = malloc(sizeof(fc->decks[index]));
+                      ^
+future.c:32:34: error: expected ‘;’ before ‘:’ token
+     fc->decks[index].cards = NULL:
+                                  ^
 Compilation of future.c failed
 
 Overall Grade: F
