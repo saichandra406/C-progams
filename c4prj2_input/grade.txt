@@ -1,44 +1,25 @@
-Grading at Mon Dec  7 10:41:02 UTC 2020
+Grading at Mon Dec  7 10:47:29 UTC 2020
 Compiling cards.c -> cards.o
 Compiling deck.c -> deck.o
 Compiling input.c -> input.o
 input.c: In function ‘hand_from_string’:
-input.c:15:3: error: unknown type name ‘deck’
-   deck * ans = NULL;
-   ^
-input.c:20:6: error: request for member ‘cards’ in something not a structure or union
-   ans->cards = NULL;
-      ^
-input.c:21:6: error: request for member ‘n_cards’ in something not a structure or union
-   ans->n_cards = 0;
-      ^
-input.c:22:3: error: implicit declaration of function ‘stripNewLine’ [-Werror=implicit-function-declaration]
+input.c:30:16: error: passing argument 1 of ‘stripNewLine’ discards ‘const’ qualifier from pointer target type [-Werror=discarded-qualifiers]
    stripNewLine(str);
+                ^
+input.c:12:6: note: expected ‘char *’ but argument is of type ‘const char *’
+ void stripNewLine(char * line){
+      ^
+input.c:31:3: error: type defaults to ‘int’ in type name [-Werror=implicit-int]
+   while((sub = strtok((const)(str + idx), " ")) != NULL){
    ^
-input.c:23:23: error: passing argument 1 of ‘strtok’ discards ‘const’ qualifier from pointer target type [-Werror=discarded-qualifiers]
-   while((sub = strtok(str + idx, " ")) != NULL){
+input.c:31:23: error: cast from pointer to integer of different size [-Werror=pointer-to-int-cast]
+   while((sub = strtok((const)(str + idx), " ")) != NULL){
                        ^
+input.c:31:23: error: passing argument 1 of ‘strtok’ makes pointer from integer without a cast [-Werror=int-conversion]
 In file included from input.c:4:0:
-/usr/include/string.h:343:14: note: expected ‘char * restrict’ but argument is of type ‘const char *’
+/usr/include/string.h:343:14: note: expected ‘char * restrict’ but argument is of type ‘int’
  extern char *strtok (char *__restrict __s, const char *__restrict __delim)
               ^
-input.c:29:26: error: passing argument 1 of ‘add_empty_card’ from incompatible pointer type [-Werror=incompatible-pointer-types]
-       p = add_empty_card(ans);
-                          ^
-In file included from input.c:7:0:
-deck.h:18:10: note: expected ‘deck_t * {aka struct deck_tag *}’ but argument is of type ‘int *’
- card_t * add_empty_card(deck_t * deck);
-          ^
-input.c:33:19: error: passing argument 1 of ‘add_card_to’ from incompatible pointer type [-Werror=incompatible-pointer-types]
-       add_card_to(ans, card_from_letters(sub[0], sub[1]));
-                   ^
-In file included from input.c:7:0:
-deck.h:17:6: note: expected ‘deck_t * {aka struct deck_tag *}’ but argument is of type ‘int *’
- void add_card_to(deck_t * deck, card_t c);
-      ^
-input.c:36:10: error: return from incompatible pointer type [-Werror=incompatible-pointer-types]
-   return ans;
-          ^
 cc1: all warnings being treated as errors
 Compilation of input.c failed
 
