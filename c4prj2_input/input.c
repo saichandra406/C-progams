@@ -23,12 +23,12 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc){
   deck_t * ans = NULL;
   card_t *p;
   char * sub;
-
+  if(strlen(str) == 0)
+    return NULL;
   ans = malloc(sizeof(*ans));
   ans->cards = NULL;
   ans->n_cards = 0;
-  stripNewLine(str);
-  while((sub = strtok((const)(str + idx), " ")) != NULL){
+  while((sub = strtok((str + idx), " ")) != NULL){
     count++;
     tmp = strlen(sub);
     idx = tmp + 1;
@@ -51,6 +51,7 @@ deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc){
   deck_t ** ans = NULL;
   while(getline(&line, &sz, f) > 0){
     ans = realloc(ans, (*n_hands + 1) * sizeof(*ans));
+    stripNewLine(line);
     ans[*n_hands] = hand_from_string(line , fc);
     *n_hands = *n_hands + 1;
   }
