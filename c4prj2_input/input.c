@@ -17,6 +17,20 @@ void stripNewLine(char * line){
   *ptr = '\0';
 }
 
+char * getsub(const char * str, size_t idx){
+  char *ans = NULL;
+  int n = 0;
+  while(str[idx+n] != '\0' && str[idx+n] != ' '){
+    n++;
+  }
+  if(n){
+    ans = malloc((n+1) * sizeof(char));
+    strcpy(ans, str+idx, n);
+    ans[n] = '\0';
+  }
+  return ans;
+}
+
 deck_t * hand_from_string(const char * str, future_cards_t * fc){
   size_t idx = 0;
   int count = 0, tmp;
@@ -28,7 +42,7 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc){
   ans = malloc(sizeof(*ans));
   ans->cards = NULL;
   ans->n_cards = 0;
-  while((sub = strtok((str + idx), " ")) != NULL){
+  while((sub = getsub(str, idx)) != NULL){
     count++;
     tmp = strlen(sub);
     idx = tmp + 1;
