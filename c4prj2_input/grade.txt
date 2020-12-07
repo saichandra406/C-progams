@@ -1,15 +1,32 @@
-Grading at Mon Dec  7 07:03:47 UTC 2020
+Grading at Mon Dec  7 07:05:48 UTC 2020
 Compiling cards.c -> cards.o
 Compiling deck.c -> deck.o
 Compiling input.c -> input.o
 Compiling future.c -> future.o
-future.c: In function ‘add_future_card’:
-future.c:30:22: error: incompatible types when assigning to type ‘deck_t {aka struct deck_tag}’ from type ‘void *’
-     fc->decks[index] = malloc(sizeof(fc->decks[index]));
-                      ^
-future.c:32:34: error: expected ‘;’ before ‘:’ token
-     fc->decks[index].cards = NULL:
-                                  ^
-Compilation of future.c failed
+Linking input.o, future.o deck.o, cards.o, and our tester
+Testing with input file with 
+ o 1 hand
+ o No unknown/future cards
+Your file matched the expected output
+Test case passed
+Testing with input file with 
+ o Many hands
+ o No unknown/future cards
+Your file matched the expected output
+Test case passed
+Testing with input file with 
+ o Many hands
+ o 1 unknown/future cards per hand
+Binary files theirs.out and ours.out differ
+Could not compare your output to the expected output 
+(explaination should be above)
+Test case failed
+Testing with input file with 
+ o Many hands
+ o Many unknown/future cards per hand
+Binary files theirs.out and ours.out differ
+Could not compare your output to the expected output 
+(explaination should be above)
+Test case failed
 
-Overall Grade: F
+Overall Grade: C
