@@ -11,6 +11,7 @@ void print_hand(deck_t * hand){
   }
   if(cp != NULL){
     print_card(**cp);
+    printf("\n");
   }
 }
 
