@@ -9,29 +9,6 @@
 #include "future.h"
 #include "input.h"
 
-int isValidSuit(char suit_let){
-  switch(suit_let){
-  case 's':
-  case 'h':
-  case 'd':
-  case 'c':
-    return 1;
-  default:
-    return 0;
-  }
-}
-
-int isValidValue(char value_let){
-  if(value_let == '0' || (value_let >= '0' + 2 && value_let <= '0' + 9) \
-      || value_let == 'J' || value_let == 'Q' || value_let == 'K'\
-     || value_let == 'A'){
-    return 1;
-  }
-  else{
-    return 0;
-  }
-}
-
 deck_t * hand_from_string(const char * str, future_cards_t * fc){
   int len=strlen(str);
   deck_t *ans=malloc(sizeof(*ans));
@@ -55,9 +32,6 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc){
 	  n++;
 	}
 	num[n] = '\0';
-	if(!isdigit(num)){
-	  goto ERR;
-	}
 	idx = atoi(num);
 	fc_len++;
 	fc_pos = realloc(fc_pos, fc_len * sizeof(*fc_pos));
@@ -66,16 +40,13 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc){
 	deck_p[fc_len - 1] = add_empty_card(ans);
       }
       else{
-	if(!isValidValue(str[i]) || !isValidSuit(str[i+1])){
-	  goto ERR;
-	}
 	card_t card=card_from_letters(str[i],str[i+1]);
 	add_card_to(ans,card);
 	i++;
       }
     }}
   if(ans->n_cards<5){
-  ERR: fprintf(stderr,"Less than 5 cards\n");
+    fprintf(stderr,"Less than 5 cards\n");
     free_deck(ans);
     ans = NULL;
   }
