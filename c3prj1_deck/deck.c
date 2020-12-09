@@ -4,15 +4,12 @@
 #include "deck.h"
 void print_hand(deck_t * hand){
   card_t ** cp = hand->cards;// use (hand->cards) for cp
-  for(size_t i=0; i < hand->n_cards - 1; i++){
+  for(size_t i=0; i < hand->n_cards; i++){
     print_card(**cp);
     printf(" ");
     cp++; //omit if used card = *cp[i]
   }
-  if(cp != NULL){
-    print_card(**cp);
-    printf("\n");
-  }
+  
 }
 
 int deck_contains(deck_t * d, card_t c) {
