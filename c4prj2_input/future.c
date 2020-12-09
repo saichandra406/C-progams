@@ -39,7 +39,7 @@ void add_future_card(future_cards_t * fc, size_t index, card_t * ptr){
 
 void replace_future_card(future_cards_t * fc, size_t index, card_t * ptr) {
   deck_t cur_deck = fc->decks[index];
-  if(cur_deck.n_cards > 0 && isEmptyCard(cur_deck.cards[0])){
+  if(cur_deck.n_cards > 0){
     //current cards are not replaced.
     for(size_t j = 0; j < cur_deck.n_cards; j++){
       copyCard(cur_deck.cards[j], ptr);
