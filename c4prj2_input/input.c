@@ -12,6 +12,9 @@
 deck_t * hand_from_string(const char * str, future_cards_t * fc){
   int len=strlen(str);
   deck_t *ans=malloc(sizeof(*ans));
+  size_t *fc_pos = NULL, idx;//store idxs in fc_pos
+  card_t **deck_p = NULL;//store empty ptrs in deck_p
+  size_t fc_len = 0;
   ans->cards=NULL;
   ans->n_cards=0;
   for(int i=0;i<len-1;i++){
@@ -29,7 +32,12 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc){
 	  n++;
 	}
 	num[n] = '\0';
-	add_future_card(fc, atoi(num), add_empty_card(ans));
+	idx = atoi(num);
+	fc_len++;
+	fc_pos = realloc(fc_pos, fc_len * sizeof(*fc_pos));
+	deck_p = realloc(deck_p, fc_len * sizeof(*deck_p));
+	fc_pos[fc_len - 1] = idx;
+	deck_p[fc_len - 1] = add_empty_card(ans);
       }
       else{
 	card_t card=card_from_letters(str[i],str[i+1]);
@@ -39,8 +47,16 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc){
     }}
   if(ans->n_cards<5){
     fprintf(stderr,"Less than 5 cards\n");
-    return NULL;
+    free_deck(ans);
+    ans = NULL;
   }
+  else{
+    for(int i=0; i < fc_len; i++){
+      add_future_card(fc, fc_pos[i], deck_p[i]);
+    }
+  }
+  free(fc_pos);
+  free(deck_p);
   return ans;
 }
 
