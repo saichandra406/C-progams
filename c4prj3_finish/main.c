@@ -82,5 +82,15 @@ int main(int argc, char ** argv) {
   }
   printf("And there were %u ties\n", counts[n_hands]);
 
+  for(int i=0; i< n_hands; i++){
+    free_deck(hands[i]);
+  }
+  free_deck(remain);
+  free(hands);
+  free(remain);
+  
+  free_future_cards(fc);
+  free(counts);
+  
   return EXIT_SUCCESS;
 }

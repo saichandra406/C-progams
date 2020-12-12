@@ -5,6 +5,15 @@
 #include "eval.h"
 #include "future.h"
 
+void free_future_cards(future_cards_t * fc){
+  for(size_t i=0; i < fc->n_decks; i++){
+    //free only card pointers not cards in them
+    free(fc->decks[i].cards);
+  }
+  free(fc->decks);
+  free(fc);
+}
+
 int isEmptyCard(card_t * p){
   if(p->suit == 0 && p->value == 0)
     return 1;
