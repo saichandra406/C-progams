@@ -1,4 +1,4 @@
-Grading at Sat Dec 12 02:00:25 UTC 2020
+Grading at Sat Dec 12 02:14:06 UTC 2020
 Running 'make clean' to do a clean build of your project
 rm -rf *.o poker *~
 Running 'make poker OTHERFLAGS=-O3' to build your project
@@ -12,284 +12,383 @@ gcc -o poker -Wall -Werror -ggdb3 -std=gnu99 -pedantic -O3 cards.o deck.o eval.o
  - Starting with some Texas Hold'em hands
 Running a simulation with 20000 draws for 2 hands...
 Valgrind reported errors:
-==248== Memcheck, a memory error detector
-==248== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==248== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==248== Command: ./poker inp.txt 20000
-==248== Parent PID: 247
-==248== 
-==248== Conditional jump or move depends on uninitialised value(s)
-==248==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==248==    by 0x403BA5: add_future_card (future.c:28)
-==248==    by 0x403EA4: hand_from_string (input.c:55)
-==248==    by 0x403F8B: read_input (input.c:70)
-==248==    by 0x400D4A: main (main.c:37)
-==248== 
-==248== 
-==248== HEAP SUMMARY:
-==248==     in use at exit: 1,484 bytes in 93 blocks
-==248==   total heap usage: 40,166 allocs, 40,073 frees, 1,140,200 bytes allocated
-==248== 
-==248== LEAK SUMMARY:
-==248==    definitely lost: 76 bytes in 5 blocks
-==248==    indirectly lost: 1,408 bytes in 88 blocks
-==248==      possibly lost: 0 bytes in 0 blocks
-==248==    still reachable: 0 bytes in 0 blocks
-==248==         suppressed: 0 bytes in 0 blocks
-==248== Rerun with --leak-check=full to see details of leaked memory
-==248== 
-==248== For counts of detected and suppressed errors, rerun with: -v
-==248== Use --track-origins=yes to see where uninitialised values come from
-==248== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==458== Memcheck, a memory error detector
+==458== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==458== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==458== Command: ./poker inp.txt 20000
+==458== Parent PID: 457
+==458== 
+==458== Conditional jump or move depends on uninitialised value(s)
+==458==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==458==    by 0x403C55: add_future_card (future.c:37)
+==458==    by 0x403F54: hand_from_string (input.c:55)
+==458==    by 0x40403B: read_input (input.c:70)
+==458==    by 0x400DAA: main (main.c:37)
+==458== 
+==458== Invalid free() / delete / delete[] / realloc()
+==458==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==458==    by 0x400D0C: main (main.c:90)
+==458==  Address 0x52077b0 is 0 bytes inside a block of size 16 free'd
+==458==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==458==    by 0x400CFC: main (main.c:88)
+==458==  Block was alloc'd at
+==458==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==458==    by 0x40158A: make_deck_exclude (deck.c:60)
+==458==    by 0x400B59: main (main.c:43)
+==458== 
+==458== 
+==458== HEAP SUMMARY:
+==458==     in use at exit: 240 bytes in 16 blocks
+==458==   total heap usage: 40,166 allocs, 40,151 frees, 1,140,200 bytes allocated
+==458== 
+==458== LEAK SUMMARY:
+==458==    definitely lost: 16 bytes in 1 blocks
+==458==    indirectly lost: 224 bytes in 15 blocks
+==458==      possibly lost: 0 bytes in 0 blocks
+==458==    still reachable: 0 bytes in 0 blocks
+==458==         suppressed: 0 bytes in 0 blocks
+==458== Rerun with --leak-check=full to see details of leaked memory
+==458== 
+==458== For counts of detected and suppressed errors, rerun with: -v
+==458== Use --track-origins=yes to see where uninitialised values come from
+==458== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 Running a simulation with 25000 draws for 3 hands...
 Valgrind reported errors:
-==253== Memcheck, a memory error detector
-==253== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==253== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==253== Command: ./poker inp.txt 25000
-==253== Parent PID: 252
-==253== 
-==253== Conditional jump or move depends on uninitialised value(s)
-==253==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==253==    by 0x403BA5: add_future_card (future.c:28)
-==253==    by 0x403EA4: hand_from_string (input.c:55)
-==253==    by 0x403F8B: read_input (input.c:70)
-==253==    by 0x400D4A: main (main.c:37)
-==253== 
-==253== 
-==253== HEAP SUMMARY:
-==253==     in use at exit: 1,744 bytes in 107 blocks
-==253==   total heap usage: 100,222 allocs, 100,115 frees, 2,821,592 bytes allocated
-==253== 
-==253== LEAK SUMMARY:
-==253==    definitely lost: 88 bytes in 5 blocks
-==253==    indirectly lost: 1,656 bytes in 102 blocks
-==253==      possibly lost: 0 bytes in 0 blocks
-==253==    still reachable: 0 bytes in 0 blocks
-==253==         suppressed: 0 bytes in 0 blocks
-==253== Rerun with --leak-check=full to see details of leaked memory
-==253== 
-==253== For counts of detected and suppressed errors, rerun with: -v
-==253== Use --track-origins=yes to see where uninitialised values come from
-==253== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==463== Memcheck, a memory error detector
+==463== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==463== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==463== Command: ./poker inp.txt 25000
+==463== Parent PID: 462
+==463== 
+==463== Conditional jump or move depends on uninitialised value(s)
+==463==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==463==    by 0x403C55: add_future_card (future.c:37)
+==463==    by 0x403F54: hand_from_string (input.c:55)
+==463==    by 0x40403B: read_input (input.c:70)
+==463==    by 0x400DAA: main (main.c:37)
+==463== 
+==463== Invalid free() / delete / delete[] / realloc()
+==463==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==463==    by 0x400D0C: main (main.c:90)
+==463==  Address 0x5208ad0 is 0 bytes inside a block of size 16 free'd
+==463==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==463==    by 0x400CFC: main (main.c:88)
+==463==  Block was alloc'd at
+==463==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==463==    by 0x40158A: make_deck_exclude (deck.c:60)
+==463==    by 0x400B59: main (main.c:43)
+==463== 
+==463== 
+==463== HEAP SUMMARY:
+==463==     in use at exit: 352 bytes in 23 blocks
+==463==   total heap usage: 100,222 allocs, 100,200 frees, 2,821,592 bytes allocated
+==463== 
+==463== LEAK SUMMARY:
+==463==    definitely lost: 16 bytes in 1 blocks
+==463==    indirectly lost: 336 bytes in 22 blocks
+==463==      possibly lost: 0 bytes in 0 blocks
+==463==    still reachable: 0 bytes in 0 blocks
+==463==         suppressed: 0 bytes in 0 blocks
+==463== Rerun with --leak-check=full to see details of leaked memory
+==463== 
+==463== For counts of detected and suppressed errors, rerun with: -v
+==463== Use --track-origins=yes to see where uninitialised values come from
+==463== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 Running a simulation with 25000 draws for 3 hands...
 Valgrind reported errors:
-==258== Memcheck, a memory error detector
-==258== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==258== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==258== Command: ./poker inp2.txt 25000
-==258== Parent PID: 257
-==258== 
-==258== Conditional jump or move depends on uninitialised value(s)
-==258==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==258==    by 0x403BA5: add_future_card (future.c:28)
-==258==    by 0x403EA4: hand_from_string (input.c:55)
-==258==    by 0x403F8B: read_input (input.c:70)
-==258==    by 0x400D4A: main (main.c:37)
-==258== 
-==258== 
-==258== HEAP SUMMARY:
-==258==     in use at exit: 1,744 bytes in 107 blocks
-==258==   total heap usage: 100,205 allocs, 100,098 frees, 2,821,116 bytes allocated
-==258== 
-==258== LEAK SUMMARY:
-==258==    definitely lost: 88 bytes in 5 blocks
-==258==    indirectly lost: 1,656 bytes in 102 blocks
-==258==      possibly lost: 0 bytes in 0 blocks
-==258==    still reachable: 0 bytes in 0 blocks
-==258==         suppressed: 0 bytes in 0 blocks
-==258== Rerun with --leak-check=full to see details of leaked memory
-==258== 
-==258== For counts of detected and suppressed errors, rerun with: -v
-==258== Use --track-origins=yes to see where uninitialised values come from
-==258== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==468== Memcheck, a memory error detector
+==468== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==468== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==468== Command: ./poker inp2.txt 25000
+==468== Parent PID: 467
+==468== 
+==468== Conditional jump or move depends on uninitialised value(s)
+==468==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==468==    by 0x403C55: add_future_card (future.c:37)
+==468==    by 0x403F54: hand_from_string (input.c:55)
+==468==    by 0x40403B: read_input (input.c:70)
+==468==    by 0x400DAA: main (main.c:37)
+==468== 
+==468== Invalid free() / delete / delete[] / realloc()
+==468==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==468==    by 0x400D0C: main (main.c:90)
+==468==  Address 0x5208ad0 is 0 bytes inside a block of size 16 free'd
+==468==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==468==    by 0x400CFC: main (main.c:88)
+==468==  Block was alloc'd at
+==468==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==468==    by 0x40158A: make_deck_exclude (deck.c:60)
+==468==    by 0x400B59: main (main.c:43)
+==468== 
+==468== 
+==468== HEAP SUMMARY:
+==468==     in use at exit: 352 bytes in 23 blocks
+==468==   total heap usage: 100,205 allocs, 100,183 frees, 2,821,116 bytes allocated
+==468== 
+==468== LEAK SUMMARY:
+==468==    definitely lost: 16 bytes in 1 blocks
+==468==    indirectly lost: 336 bytes in 22 blocks
+==468==      possibly lost: 0 bytes in 0 blocks
+==468==    still reachable: 0 bytes in 0 blocks
+==468==         suppressed: 0 bytes in 0 blocks
+==468== Rerun with --leak-check=full to see details of leaked memory
+==468== 
+==468== For counts of detected and suppressed errors, rerun with: -v
+==468== Use --track-origins=yes to see where uninitialised values come from
+==468== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 Running a simulation with 25000 draws for 2 hands...
 Valgrind reported errors:
-==263== Memcheck, a memory error detector
-==263== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==263== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==263== Command: ./poker inp2.txt 25000
-==263== Parent PID: 262
-==263== 
-==263== Conditional jump or move depends on uninitialised value(s)
-==263==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==263==    by 0x403BA5: add_future_card (future.c:28)
-==263==    by 0x403EA4: hand_from_string (input.c:55)
-==263==    by 0x403F8B: read_input (input.c:70)
-==263==    by 0x400D4A: main (main.c:37)
-==263== 
-==263== 
-==263== HEAP SUMMARY:
-==263==     in use at exit: 1,484 bytes in 93 blocks
-==263==   total heap usage: 50,195 allocs, 50,102 frees, 1,421,012 bytes allocated
-==263== 
-==263== LEAK SUMMARY:
-==263==    definitely lost: 76 bytes in 5 blocks
-==263==    indirectly lost: 1,408 bytes in 88 blocks
-==263==      possibly lost: 0 bytes in 0 blocks
-==263==    still reachable: 0 bytes in 0 blocks
-==263==         suppressed: 0 bytes in 0 blocks
-==263== Rerun with --leak-check=full to see details of leaked memory
-==263== 
-==263== For counts of detected and suppressed errors, rerun with: -v
-==263== Use --track-origins=yes to see where uninitialised values come from
-==263== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==473== Memcheck, a memory error detector
+==473== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==473== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==473== Command: ./poker inp2.txt 25000
+==473== Parent PID: 472
+==473== 
+==473== Conditional jump or move depends on uninitialised value(s)
+==473==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==473==    by 0x403C55: add_future_card (future.c:37)
+==473==    by 0x403F54: hand_from_string (input.c:55)
+==473==    by 0x40403B: read_input (input.c:70)
+==473==    by 0x400DAA: main (main.c:37)
+==473== 
+==473== Invalid free() / delete / delete[] / realloc()
+==473==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==473==    by 0x400D0C: main (main.c:90)
+==473==  Address 0x52077b0 is 0 bytes inside a block of size 16 free'd
+==473==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==473==    by 0x400CFC: main (main.c:88)
+==473==  Block was alloc'd at
+==473==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==473==    by 0x40158A: make_deck_exclude (deck.c:60)
+==473==    by 0x400B59: main (main.c:43)
+==473== 
+==473== 
+==473== HEAP SUMMARY:
+==473==     in use at exit: 240 bytes in 16 blocks
+==473==   total heap usage: 50,195 allocs, 50,180 frees, 1,421,012 bytes allocated
+==473== 
+==473== LEAK SUMMARY:
+==473==    definitely lost: 16 bytes in 1 blocks
+==473==    indirectly lost: 224 bytes in 15 blocks
+==473==      possibly lost: 0 bytes in 0 blocks
+==473==    still reachable: 0 bytes in 0 blocks
+==473==         suppressed: 0 bytes in 0 blocks
+==473== Rerun with --leak-check=full to see details of leaked memory
+==473== 
+==473== For counts of detected and suppressed errors, rerun with: -v
+==473== Use --track-origins=yes to see where uninitialised values come from
+==473== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 Running a simulation with 80000 draws for 4 hands...
 Valgrind reported errors:
-==268== Memcheck, a memory error detector
-==268== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==268== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==268== Command: ./poker inp3.txt 80000
-==268== Parent PID: 267
-==268== 
-==268== Conditional jump or move depends on uninitialised value(s)
-==268==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==268==    by 0x403BA5: add_future_card (future.c:28)
-==268==    by 0x403EA4: hand_from_string (input.c:55)
-==268==    by 0x403F8B: read_input (input.c:70)
-==268==    by 0x400D4A: main (main.c:37)
-==268== 
-==268== 
-==268== HEAP SUMMARY:
-==268==     in use at exit: 1,812 bytes in 115 blocks
-==268==   total heap usage: 480,236 allocs, 480,121 frees, 13,461,284 bytes allocated
-==268== 
-==268== LEAK SUMMARY:
-==268==    definitely lost: 100 bytes in 5 blocks
-==268==    indirectly lost: 1,712 bytes in 110 blocks
-==268==      possibly lost: 0 bytes in 0 blocks
-==268==    still reachable: 0 bytes in 0 blocks
-==268==         suppressed: 0 bytes in 0 blocks
-==268== Rerun with --leak-check=full to see details of leaked memory
-==268== 
-==268== For counts of detected and suppressed errors, rerun with: -v
-==268== Use --track-origins=yes to see where uninitialised values come from
-==268== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==478== Memcheck, a memory error detector
+==478== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==478== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==478== Command: ./poker inp3.txt 80000
+==478== Parent PID: 477
+==478== 
+==478== Conditional jump or move depends on uninitialised value(s)
+==478==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==478==    by 0x403C55: add_future_card (future.c:37)
+==478==    by 0x403F54: hand_from_string (input.c:55)
+==478==    by 0x40403B: read_input (input.c:70)
+==478==    by 0x400DAA: main (main.c:37)
+==478== 
+==478== Invalid free() / delete / delete[] / realloc()
+==478==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==478==    by 0x400D0C: main (main.c:90)
+==478==  Address 0x5209060 is 0 bytes inside a block of size 16 free'd
+==478==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==478==    by 0x400CFC: main (main.c:88)
+==478==  Block was alloc'd at
+==478==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==478==    by 0x40158A: make_deck_exclude (deck.c:60)
+==478==    by 0x400B59: main (main.c:43)
+==478== 
+==478== 
+==478== HEAP SUMMARY:
+==478==     in use at exit: 464 bytes in 30 blocks
+==478==   total heap usage: 480,236 allocs, 480,207 frees, 13,461,284 bytes allocated
+==478== 
+==478== LEAK SUMMARY:
+==478==    definitely lost: 16 bytes in 1 blocks
+==478==    indirectly lost: 448 bytes in 29 blocks
+==478==      possibly lost: 0 bytes in 0 blocks
+==478==    still reachable: 0 bytes in 0 blocks
+==478==         suppressed: 0 bytes in 0 blocks
+==478== Rerun with --leak-check=full to see details of leaked memory
+==478== 
+==478== For counts of detected and suppressed errors, rerun with: -v
+==478== Use --track-origins=yes to see where uninitialised values come from
+==478== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 Running a simulation with 30000 draws for 2 hands...
 Valgrind reported errors:
-==273== Memcheck, a memory error detector
-==273== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==273== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==273== Command: ./poker inp.txt 30000
-==273== Parent PID: 272
-==273== 
-==273== Conditional jump or move depends on uninitialised value(s)
-==273==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==273==    by 0x403BA5: add_future_card (future.c:28)
-==273==    by 0x403EA4: hand_from_string (input.c:55)
-==273==    by 0x403F8B: read_input (input.c:70)
-==273==    by 0x400D4A: main (main.c:37)
-==273== 
-==273== 
-==273== HEAP SUMMARY:
-==273==     in use at exit: 1,340 bytes in 87 blocks
-==273==   total heap usage: 60,172 allocs, 60,085 frees, 1,699,324 bytes allocated
-==273== 
-==273== LEAK SUMMARY:
-==273==    definitely lost: 76 bytes in 5 blocks
-==273==    indirectly lost: 1,264 bytes in 82 blocks
-==273==      possibly lost: 0 bytes in 0 blocks
-==273==    still reachable: 0 bytes in 0 blocks
-==273==         suppressed: 0 bytes in 0 blocks
-==273== Rerun with --leak-check=full to see details of leaked memory
-==273== 
-==273== For counts of detected and suppressed errors, rerun with: -v
-==273== Use --track-origins=yes to see where uninitialised values come from
-==273== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==483== Memcheck, a memory error detector
+==483== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==483== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==483== Command: ./poker inp.txt 30000
+==483== Parent PID: 482
+==483== 
+==483== Conditional jump or move depends on uninitialised value(s)
+==483==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==483==    by 0x403C55: add_future_card (future.c:37)
+==483==    by 0x403F54: hand_from_string (input.c:55)
+==483==    by 0x40403B: read_input (input.c:70)
+==483==    by 0x400DAA: main (main.c:37)
+==483== 
+==483== Invalid free() / delete / delete[] / realloc()
+==483==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==483==    by 0x400D0C: main (main.c:90)
+==483==  Address 0x5206f90 is 0 bytes inside a block of size 16 free'd
+==483==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==483==    by 0x400CFC: main (main.c:88)
+==483==  Block was alloc'd at
+==483==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==483==    by 0x40158A: make_deck_exclude (deck.c:60)
+==483==    by 0x400B59: main (main.c:43)
+==483== 
+==483== 
+==483== HEAP SUMMARY:
+==483==     in use at exit: 240 bytes in 16 blocks
+==483==   total heap usage: 60,172 allocs, 60,157 frees, 1,699,324 bytes allocated
+==483== 
+==483== LEAK SUMMARY:
+==483==    definitely lost: 16 bytes in 1 blocks
+==483==    indirectly lost: 224 bytes in 15 blocks
+==483==      possibly lost: 0 bytes in 0 blocks
+==483==    still reachable: 0 bytes in 0 blocks
+==483==         suppressed: 0 bytes in 0 blocks
+==483== Rerun with --leak-check=full to see details of leaked memory
+==483== 
+==483== For counts of detected and suppressed errors, rerun with: -v
+==483== Use --track-origins=yes to see where uninitialised values come from
+==483== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
  - Next, few Seven Card Stud hands
 Running a simulation with 30000 draws for 2 hands...
 Valgrind reported errors:
-==278== Memcheck, a memory error detector
-==278== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==278== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==278== Command: ./poker inp.txt 30000
-==278== Parent PID: 277
-==278== 
-==278== Conditional jump or move depends on uninitialised value(s)
-==278==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==278==    by 0x403BA5: add_future_card (future.c:28)
-==278==    by 0x403EA4: hand_from_string (input.c:55)
-==278==    by 0x403F8B: read_input (input.c:70)
-==278==    by 0x400D4A: main (main.c:37)
-==278== 
-==278== 
-==278== HEAP SUMMARY:
-==278==     in use at exit: 1,484 bytes in 94 blocks
-==278==   total heap usage: 60,163 allocs, 60,069 frees, 1,699,672 bytes allocated
-==278== 
-==278== LEAK SUMMARY:
-==278==    definitely lost: 76 bytes in 5 blocks
-==278==    indirectly lost: 1,408 bytes in 89 blocks
-==278==      possibly lost: 0 bytes in 0 blocks
-==278==    still reachable: 0 bytes in 0 blocks
-==278==         suppressed: 0 bytes in 0 blocks
-==278== Rerun with --leak-check=full to see details of leaked memory
-==278== 
-==278== For counts of detected and suppressed errors, rerun with: -v
-==278== Use --track-origins=yes to see where uninitialised values come from
-==278== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==488== Memcheck, a memory error detector
+==488== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==488== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==488== Command: ./poker inp.txt 30000
+==488== Parent PID: 487
+==488== 
+==488== Conditional jump or move depends on uninitialised value(s)
+==488==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==488==    by 0x403C55: add_future_card (future.c:37)
+==488==    by 0x403F54: hand_from_string (input.c:55)
+==488==    by 0x40403B: read_input (input.c:70)
+==488==    by 0x400DAA: main (main.c:37)
+==488== 
+==488== Invalid free() / delete / delete[] / realloc()
+==488==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==488==    by 0x400D0C: main (main.c:90)
+==488==  Address 0x5207780 is 0 bytes inside a block of size 16 free'd
+==488==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==488==    by 0x400CFC: main (main.c:88)
+==488==  Block was alloc'd at
+==488==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==488==    by 0x40158A: make_deck_exclude (deck.c:60)
+==488==    by 0x400B59: main (main.c:43)
+==488== 
+==488== 
+==488== HEAP SUMMARY:
+==488==     in use at exit: 240 bytes in 16 blocks
+==488==   total heap usage: 60,163 allocs, 60,148 frees, 1,699,672 bytes allocated
+==488== 
+==488== LEAK SUMMARY:
+==488==    definitely lost: 16 bytes in 1 blocks
+==488==    indirectly lost: 224 bytes in 15 blocks
+==488==      possibly lost: 0 bytes in 0 blocks
+==488==    still reachable: 0 bytes in 0 blocks
+==488==         suppressed: 0 bytes in 0 blocks
+==488== Rerun with --leak-check=full to see details of leaked memory
+==488== 
+==488== For counts of detected and suppressed errors, rerun with: -v
+==488== Use --track-origins=yes to see where uninitialised values come from
+==488== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 Running a simulation with 40000 draws for 3 hands...
 Valgrind reported errors:
-==283== Memcheck, a memory error detector
-==283== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==283== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==283== Command: ./poker inp2.txt 40000
-==283== Parent PID: 282
-==283== 
-==283== Conditional jump or move depends on uninitialised value(s)
-==283==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==283==    by 0x403BA5: add_future_card (future.c:28)
-==283==    by 0x403EA4: hand_from_string (input.c:55)
-==283==    by 0x403F8B: read_input (input.c:70)
-==283==    by 0x400D4A: main (main.c:37)
-==283== 
-==283== 
-==283== HEAP SUMMARY:
-==283==     in use at exit: 1,664 bytes in 105 blocks
-==283==   total heap usage: 160,046 allocs, 159,941 frees, 4,495,136 bytes allocated
-==283== 
-==283== LEAK SUMMARY:
-==283==    definitely lost: 88 bytes in 5 blocks
-==283==    indirectly lost: 1,576 bytes in 100 blocks
-==283==      possibly lost: 0 bytes in 0 blocks
-==283==    still reachable: 0 bytes in 0 blocks
-==283==         suppressed: 0 bytes in 0 blocks
-==283== Rerun with --leak-check=full to see details of leaked memory
-==283== 
-==283== For counts of detected and suppressed errors, rerun with: -v
-==283== Use --track-origins=yes to see where uninitialised values come from
-==283== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==493== Memcheck, a memory error detector
+==493== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==493== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==493== Command: ./poker inp2.txt 40000
+==493== Parent PID: 492
+==493== 
+==493== Conditional jump or move depends on uninitialised value(s)
+==493==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==493==    by 0x403C55: add_future_card (future.c:37)
+==493==    by 0x403F54: hand_from_string (input.c:55)
+==493==    by 0x40403B: read_input (input.c:70)
+==493==    by 0x400DAA: main (main.c:37)
+==493== 
+==493== Invalid free() / delete / delete[] / realloc()
+==493==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==493==    by 0x400D0C: main (main.c:90)
+==493==  Address 0x52086a0 is 0 bytes inside a block of size 16 free'd
+==493==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==493==    by 0x400CFC: main (main.c:88)
+==493==  Block was alloc'd at
+==493==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==493==    by 0x40158A: make_deck_exclude (deck.c:60)
+==493==    by 0x400B59: main (main.c:43)
+==493== 
+==493== 
+==493== HEAP SUMMARY:
+==493==     in use at exit: 352 bytes in 23 blocks
+==493==   total heap usage: 160,046 allocs, 160,024 frees, 4,495,136 bytes allocated
+==493== 
+==493== LEAK SUMMARY:
+==493==    definitely lost: 16 bytes in 1 blocks
+==493==    indirectly lost: 336 bytes in 22 blocks
+==493==      possibly lost: 0 bytes in 0 blocks
+==493==    still reachable: 0 bytes in 0 blocks
+==493==         suppressed: 0 bytes in 0 blocks
+==493== Rerun with --leak-check=full to see details of leaked memory
+==493== 
+==493== For counts of detected and suppressed errors, rerun with: -v
+==493== Use --track-origins=yes to see where uninitialised values come from
+==493== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
  - Then one from a completely made up poker variant
 Running a simulation with 100000 draws for 6 hands...
 Valgrind reported errors:
-==288== Memcheck, a memory error detector
-==288== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==288== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==288== Command: ./poker whacky.txt 100000
-==288== Parent PID: 287
-==288== 
-==288== Conditional jump or move depends on uninitialised value(s)
-==288==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==288==    by 0x403BA5: add_future_card (future.c:28)
-==288==    by 0x403EA4: hand_from_string (input.c:55)
-==288==    by 0x403F8B: read_input (input.c:70)
-==288==    by 0x400D4A: main (main.c:37)
-==288== 
-==288== 
-==288== HEAP SUMMARY:
-==288==     in use at exit: 2,316 bytes in 142 blocks
-==288==   total heap usage: 998,914 allocs, 998,772 frees, 27,984,980 bytes allocated
-==288== 
-==288== LEAK SUMMARY:
-==288==    definitely lost: 124 bytes in 5 blocks
-==288==    indirectly lost: 2,192 bytes in 137 blocks
-==288==      possibly lost: 0 bytes in 0 blocks
-==288==    still reachable: 0 bytes in 0 blocks
-==288==         suppressed: 0 bytes in 0 blocks
-==288== Rerun with --leak-check=full to see details of leaked memory
-==288== 
-==288== For counts of detected and suppressed errors, rerun with: -v
-==288== Use --track-origins=yes to see where uninitialised values come from
-==288== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==498== Memcheck, a memory error detector
+==498== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==498== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==498== Command: ./poker whacky.txt 100000
+==498== Parent PID: 497
+==498== 
+==498== Conditional jump or move depends on uninitialised value(s)
+==498==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==498==    by 0x403C55: add_future_card (future.c:37)
+==498==    by 0x403F54: hand_from_string (input.c:55)
+==498==    by 0x40403B: read_input (input.c:70)
+==498==    by 0x400DAA: main (main.c:37)
+==498== 
+==498== Invalid free() / delete / delete[] / realloc()
+==498==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==498==    by 0x400D0C: main (main.c:90)
+==498==  Address 0x520bfc0 is 0 bytes inside a block of size 16 free'd
+==498==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==498==    by 0x400CFC: main (main.c:88)
+==498==  Block was alloc'd at
+==498==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==498==    by 0x40158A: make_deck_exclude (deck.c:60)
+==498==    by 0x400B59: main (main.c:43)
+==498== 
+==498== 
+==498== HEAP SUMMARY:
+==498==     in use at exit: 688 bytes in 44 blocks
+==498==   total heap usage: 998,914 allocs, 998,871 frees, 27,984,980 bytes allocated
+==498== 
+==498== LEAK SUMMARY:
+==498==    definitely lost: 16 bytes in 1 blocks
+==498==    indirectly lost: 672 bytes in 43 blocks
+==498==      possibly lost: 0 bytes in 0 blocks
+==498==    still reachable: 0 bytes in 0 blocks
+==498==         suppressed: 0 bytes in 0 blocks
+==498== Rerun with --leak-check=full to see details of leaked memory
+==498== 
+==498== For counts of detected and suppressed errors, rerun with: -v
+==498== Use --track-origins=yes to see where uninitialised values come from
+==498== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 
 Overall Grade: F
