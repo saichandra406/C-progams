@@ -42,7 +42,6 @@ int main(int argc, char ** argv) {
     counts[i] = 0;
   }
   remain = build_remaining_deck(hands, n_hands);
-  shuffle(remain);
 
   //Monte-Carlo simulaiton
   for(size_t i = 1; i <= n_trials; i++){
@@ -56,7 +55,7 @@ int main(int argc, char ** argv) {
 
     cur_winner = hands[0];
     cur_hand = 0;
-    tie = 1;
+    tie = 0; //current no tie
     for(size_t j=1; j < n_hands; j++){
       res = compare_hands(cur_winner, hands[j]);
 	//res > 0 , current winner does not change
