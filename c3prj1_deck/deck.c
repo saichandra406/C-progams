@@ -71,6 +71,7 @@ deck_t * make_deck_exclude(deck_t * excluded_cards){
       add_card_to(ans, cur_c);
     }
   }
+  free_deck(excluded_cards);
   return ans;
 }
 
