@@ -34,6 +34,7 @@ int main(int argc, char ** argv) {
     n_trials = atoi(argv[2]);
   }
   fc->n_decks = 0;
+  fc->decks = NULL;
   hands = read_input(f, &n_hands, fc);
   fclose(f);
   counts = malloc((n_hands + 1) * sizeof(*counts));
@@ -87,7 +88,6 @@ int main(int argc, char ** argv) {
   }
   free_deck(remain);
   free(hands);
-  free(remain);
   
   free_future_cards(fc);
   free(counts);
