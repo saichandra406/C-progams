@@ -17,7 +17,7 @@ int main(int argc, char ** argv) {
   unsigned *counts; //win counts
   future_cards_t *fc = malloc(sizeof(*fc));
   deck_t **hands, *remain, *cur_winner;
-  int tie = 0, res, cur_hand;
+  int tie, res, cur_hand;
 
   if(!(argc == 2 || argc == 3)){
     fprintf(stderr, "Does not have 1 or 2 arguments\n");
@@ -56,6 +56,7 @@ int main(int argc, char ** argv) {
 
     cur_winner = hands[0];
     cur_hand = 0;
+    tie = 1;
     for(size_t j=1; j < n_hands; j++){
       res = compare_hands(cur_winner, hands[j]);
 	//res > 0 , current winner does not change
