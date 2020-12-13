@@ -42,6 +42,7 @@ int main(int argc, char ** argv) {
     counts[i] = 0;
   }
   remain = build_remaining_deck(hands, n_hands);
+  shuffle(remain);
 
   //Monte-Carlo simulaiton
   for(size_t i = 1; i <= n_trials; i++){
