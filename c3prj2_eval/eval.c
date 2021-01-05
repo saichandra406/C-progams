@@ -127,14 +127,23 @@ hand_eval_t build_hand_from_match(deck_t * hand,
 				  size_t idx) {
 
   hand_eval_t ans;
-  unsigned i = 0, j;
+  unsigned i = 0, j; // i = no. of copied cards, also idx for ans.cards
   ans.ranking = what;
   while(i < n){
 		ans.cards[i] = hand->cards[idx+i];
 		i++;
   }
   j = 0;
+  //copy remaining card pointers if copied cards < 5
+  /*
+    start from j = 0
+    loop through j till 5 cards are copied:	
+        if j value not between [idx, idx + n):
+            copy the card pointer in j index
+            increment cards_copied
+*/
   while(i < 5){
+
 	  if(j < idx || j >= idx + n){
 		  ans.cards[i] = hand->cards[j];
 		  i++;
