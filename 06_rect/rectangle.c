@@ -44,10 +44,14 @@ rectangle intersection(rectangle r1, rectangle r2) {
   r1 = canonicalize(r1);
   r2 = canonicalize(r2);
   
-  left = r1.x > r2.x ? r1.x : r2.x;
-  bottom = r1.y > r2.y ? r1.y : r2.y;
-  right = r1.x + r1.width < r2.x + r2.width ? r1.x + r1.width : r2.x + r2.width;
-  top = r1.y + r1.height < r2.y + r2.height ? r1.y + r1.height : r2.y + r2.height;
+  //left = r1.x > r2.x ? r1.x : r2.x;
+  //bottom = r1.y > r2.y ? r1.y : r2.y;
+  //right = r1.x + r1.width < r2.x + r2.width ? r1.x + r1.width : r2.x + r2.width;
+  //top = r1.y + r1.height < r2.y + r2.height ? r1.y + r1.height : r2.y + r2.height;
+  left = max(r1.x, r2.x);  
+  bottom = max(r1.y, r2.y);  
+  right = min(r1.x + r1.width, r2.x + r2.width);
+  top = min(r1.y + r1.height, r2.y + r2.height);
 
   ans.x = left;
   ans.y = bottom;
