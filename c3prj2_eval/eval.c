@@ -121,6 +121,7 @@ int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
 	 break;
       }
     }
+    //this if-statement should be here, not outside	  
     if(ret_val == 1)
       return -1;
   }
