@@ -104,8 +104,12 @@ int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
   int ret_val; //return value
   ret_val = is_straight_helper(hand, index,fs, 5);
   
+  //on ret_val = 0, check ace low straight: index start at ace
   if(ret_val == 0 && hand->cards[index]->value == VALUE_ACE
         && (fs == NUM_SUITS || fs == hand->cards[index]->suit)){
+    //check straight at other cards but straight_count is 4
+    //need 4 cards 5,4,3,2 to make A_L straight.
+    //So index only till n_cards - 3
     while(index < hand->n_cards - 3){
       index++;
       if(hand->cards[index]->value == 5
