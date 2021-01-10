@@ -77,26 +77,29 @@ ssize_t  find_secondary_pair(deck_t * hand,
 }
 
 int is_straight_helper(deck_t * hand, size_t index, suit_t fs, unsigned straight_count){
-	unsigned nextv, count=0; //next card value, no of success comparisions
-	size_t cur_idx = index;
-	if(cur_idx <= hand->n_cards - 4 &&
-		(fs == NUM_SUITS || fs == hand->cards[cur_idx]->suit)){
-		nextv = hand->cards[cur_idx]->value - 1;
-		while(cur_idx < hand->n_cards - 1){
-			//as we are incrementing after check so condition is < n - 1
-			cur_idx++;
-			if(hand->cards[cur_idx]->value == nextv &&
-				(fs == NUM_SUITS || fs == hand->cards[cur_idx]->suit)){
-					count++;
-					nextv--;
-					if(count == straight_count - 1)
-						break;
-				}
-		}
-		if(count == straight_count - 1) return 1;
-	}
-	//default else
-	return 0;
+  unsigned nextv, count=0; //next card value, no of success comparisions
+  size_t cur_idx = index;
+  //need exactly 5 cards for straight, 4 for A_L straight
+  //so cur_idx cannot be more than n_cards - 4
+  if(cur_idx <= hand->n_cards - 4 &&
+    (fs == NUM_SUITS || fs == hand->cards[cur_idx]->suit)){
+    nextv = hand->cards[cur_idx]->value - 1;
+    while(cur_idx < hand->n_cards - 1){
+      //as we are incrementing idx after check so condition is < n - 1
+      cur_idx++;
+      if(hand->cards[cur_idx]->value == nextv &&
+        (fs == NUM_SUITS || fs == hand->cards[cur_idx]->suit)){
+	count++;
+	nextv--;
+	// can be return statement rather than break
+	if(count == straight_count - 1)  break;
+      }
+    }
+    //if return used inside while-loop then remove the if-statement.
+    if(count == straight_count - 1) return 1;
+  }
+  //default else
+  return 0;
   
 }
 
